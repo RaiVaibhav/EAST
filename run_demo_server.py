@@ -56,6 +56,8 @@ def get_predictor(checkpoint_path):
     logger.info('Restore from {}'.format(model_path))
     saver.restore(sess, model_path)
 
+    print("test3")
+
     def predictor(img):
         """
         :return: {
