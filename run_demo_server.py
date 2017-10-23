@@ -201,8 +201,13 @@ def index_post():
     bio = io.BytesIO()
     request.files['image'].save(bio)
     img = cv2.imdecode(np.frombuffer(bio.getvalue(), dtype='uint8'), 1)
+
+    print(img, "\ntest1") #testing
+
     rst = get_predictor(checkpoint_path)(img)
 
+    print("test2") #testing
+    
     save_result(img, rst)
     return render_template('index.html', session_id=rst['session_id'])
 
