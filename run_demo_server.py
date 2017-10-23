@@ -51,12 +51,14 @@ def get_predictor(checkpoint_path):
 
     sess = tf.Session(config=tf.ConfigProto(allow_soft_placement=True))
 
+    print(checkpoint_path,"\ntest3")
+
     ckpt_state = tf.train.get_checkpoint_state(checkpoint_path)
     model_path = os.path.join(checkpoint_path, os.path.basename(ckpt_state.model_checkpoint_path))
     logger.info('Restore from {}'.format(model_path))
     saver.restore(sess, model_path)
 
-    print("test3")
+    print("test4")
 
     def predictor(img):
         """
