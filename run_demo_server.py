@@ -44,6 +44,8 @@ def get_predictor(checkpoint_path):
     input_images = tf.placeholder(tf.float32, shape=[None, None, None, 3], name='input_images')
     global_step = tf.get_variable('global_step', [], initializer=tf.constant_initializer(0), trainable=False)
 
+    print(checkpoint_path,"\ntest5")
+
     f_score, f_geometry = model.model(input_images, is_training=False)
 
     variable_averages = tf.train.ExponentialMovingAverage(0.997, global_step)
