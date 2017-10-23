@@ -41,6 +41,8 @@ def get_predictor(checkpoint_path):
     import lanms
     from eval import resize_image, sort_poly, detect
 
+    print(checkpoint_path,"\ntest6")
+
     input_images = tf.placeholder(tf.float32, shape=[None, None, None, 3], name='input_images')
     global_step = tf.get_variable('global_step', [], initializer=tf.constant_initializer(0), trainable=False)
 
