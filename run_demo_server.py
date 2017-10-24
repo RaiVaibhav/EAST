@@ -152,7 +152,7 @@ class Config:
 config = Config()
 
 
-app = origami.register("nongh:0.0.0.0:268237:5001:8769:cvfy.cloudcv.org")
+app = origami.register("nongh:10.0.3.21:268237:5001:8769:cvfy.cloudcv.org") 
 
 #@origami.crossdomain
 #@app.route('/')
