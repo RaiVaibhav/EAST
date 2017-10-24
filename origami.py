@@ -162,7 +162,7 @@ def getUniqueCacheId():
     return hashlib.md5(
         functools.reduce((lambda x, y: x + y), [
             str(functools.reduce(lambda x, y: ord(x) ^ ord(y) 
-            if isinstance(x, str) else x ^ ord(y), temp)) 
+            if isinstance(x, str) else x ^ ord(y), temp)).encode('utf-8') 
             for temp in zip(*md5_store)
             ])
     ).hexdigest()
