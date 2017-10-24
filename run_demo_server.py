@@ -214,7 +214,7 @@ def index_post():
 
 
 @origami.crossdomain
-@app.listen()
+@app.route()
 def runner():
     global checkpoint_path
     parser = argparse.ArgumentParser()
