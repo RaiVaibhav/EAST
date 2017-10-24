@@ -207,7 +207,7 @@ def index_post():
     return render_template('index.html', session_id=rst['session_id'])
 
 @origami.crossdomain
-@app.listen()
+@app.route('/')
 def main():
     global checkpoint_path
     parser = argparse.ArgumentParser()
@@ -224,4 +224,4 @@ def main():
     app.debug = args.debug
     return 'OK'
     
-app.run('0.0.0.0', args.port)
+app.run('0.0.0.0', 8769)
