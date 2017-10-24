@@ -213,8 +213,8 @@ def index_post():
     return render_template('index.html', session_id=rst['session_id'])
 
 
-@cvfy.crossdomain
-@app.listen()
+@origami.crossdomain
+@app.route('/')
 def runner():
     global checkpoint_path
     parser = argparse.ArgumentParser()
