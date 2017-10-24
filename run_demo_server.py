@@ -36,8 +36,6 @@ def get_host_info():
 def get_predictor(checkpoint_path):
     logger.info('loading model')
 
-    print(checkpoint_path,"\ntest7")
-
     import tensorflow as tf
     import model
 
@@ -45,12 +43,8 @@ def get_predictor(checkpoint_path):
     import lanms
     from eval import resize_image, sort_poly, detect
 
-    print(checkpoint_path,"\ntest6")
-
     input_images = tf.placeholder(tf.float32, shape=[None, None, None, 3], name='input_images')
     global_step = tf.get_variable('global_step', [], initializer=tf.constant_initializer(0), trainable=False)
-
-    print(checkpoint_path,"\ntest5")
 
     f_score, f_geometry = model.model(input_images, is_training=False)
 
@@ -59,14 +53,10 @@ def get_predictor(checkpoint_path):
 
     sess = tf.Session(config=tf.ConfigProto(allow_soft_placement=True))
 
-    print(checkpoint_path,"\ntest3")
-
     ckpt_state = tf.train.get_checkpoint_state(checkpoint_path)
     model_path = os.path.join(checkpoint_path, os.path.basename(ckpt_state.model_checkpoint_path))
     logger.info('Restore from {}'.format(model_path))
     saver.restore(sess, model_path)
-
-    print("test4")
 
     def predictor(img):
         """
@@ -214,11 +204,7 @@ def index_post():
     request.files['image'].save(bio)
     img = cv2.imdecode(np.frombuffer(bio.getvalue(), dtype='uint8'), 1)
 
-    print(img, "\ntest1") #testing
-
     rst = get_predictor(checkpoint_path)(img)
-
-    print("test2") #testing
     
     save_result(img, rst)
     return render_template('index.html', session_id=rst['session_id'])
