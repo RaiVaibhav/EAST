@@ -17,6 +17,7 @@ import numpy as np
 from tornado.wsgi import WSGIContainer
 from tornado.httpserver import HTTPServer
 from tornado.ioloop import IOLoop
+from functools
 
 CVFY_INJECTION_SUBPATH = '/inject'
 
@@ -159,7 +160,7 @@ def getUniqueCacheId():
         image_object.seek(0)        
 
     return hashlib.md5(
-        reduce((lambda x, y: x + y), [
+        functools.reduce((lambda x, y: x + y), [
             str(reduce(lambda x, y: ord(x) ^ ord(y) 
             if isinstance(x, str) else x ^ ord(y), temp)) 
             for temp in zip(*md5_store)
