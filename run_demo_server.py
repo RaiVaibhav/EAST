@@ -181,7 +181,8 @@ def save_result(img, rst):
     # save illustration
     output_path = os.path.join(dirpath, 'output.png')
     cv2.imwrite(output_path, draw_illu(img.copy(), rst))
-    origami.sendImageArray([output_path],mode = 'file_path')
+    img1 = draw_illu(img.copy(), rst)
+    origami.sendImageArray([img1],mode = 'numpy_array')
 
     # save json data
     output_path = os.path.join(dirpath, 'result.json')
