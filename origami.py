@@ -236,7 +236,7 @@ def getTextArray():
         pass
     return (textdata)
 
-def getImageArray(mode='file_path'):
+def getImageArray(mode='numpy_array'):
     validateTOKEN(sys._getframe().f_code.co_name)
     imagedata = []
     i = 0

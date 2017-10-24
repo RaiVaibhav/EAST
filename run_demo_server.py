@@ -198,9 +198,9 @@ checkpoint_path = './east_icdar2015_resnet_v1_50_rbox'
 def index_post():
     global predictor
     import io
-    bio = io.BytesIO()
-    request.files['image'].save(bio)
-    img = cv2.imdecode(np.frombuffer(bio.getvalue(), dtype='uint8'), 1)
+    #bio = io.BytesIO()
+    #request.files['image'].save(bio)
+    img = origami.getImageArray()
     rst = get_predictor(checkpoint_path)(img)
 
     save_result(img, rst)
