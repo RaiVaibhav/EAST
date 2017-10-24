@@ -9,7 +9,7 @@ import numpy as np
 import uuid
 import json
 
-import functools
+import functools32
 import logging
 import collections
 import origami
@@ -20,7 +20,7 @@ logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 
 
-@functools.lru_cache(maxsize=1)
+@functools32.lru_cache(maxsize=1)
 def get_host_info():
     ret = {}
     with open('/proc/cpuinfo') as f:
@@ -35,7 +35,7 @@ def get_host_info():
     return ret
 
 
-@functools.lru_cache(maxsize=100)
+@functools32.lru_cache(maxsize=100)
 def get_predictor(checkpoint_path):
     logger.info('loading model')
 
