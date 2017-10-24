@@ -96,7 +96,7 @@ def register(APP_TOKEN):
     else:
         raise Exception("cvfy [Error Code: 012] => Malformed Token - Cannot set Target")
 
-    app.listen = override_route(app.route)
+    app.route = override_route(app.route)
     app.run = override_run(TOKEN)
     return (app)
 
