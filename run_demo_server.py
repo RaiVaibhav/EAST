@@ -9,7 +9,7 @@ import numpy as np
 import uuid
 import json
 
-import functools32
+import functools
 import logging
 import collections
 
@@ -17,7 +17,7 @@ logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 
 
-@functools32.lru_cache(maxsize=1)
+@functools.lru_cache(maxsize=1)
 def get_host_info():
     ret = {}
     with open('/proc/cpuinfo') as f:
@@ -32,13 +32,11 @@ def get_host_info():
     return ret
 
 
-@functools32.lru_cache(maxsize=100)
+@functools.lru_cache(maxsize=100)
 def get_predictor(checkpoint_path):
     logger.info('loading model')
-
     import tensorflow as tf
     import model
-
     from icdar import restore_rectangle
     import lanms
     from eval import resize_image, sort_poly, detect
@@ -193,7 +191,7 @@ def save_result(img, rst):
 
 
 
-checkpoint_path = '~/GSOC/east_model/tmp/east_icdar2015_resnet_v1_50_rbox/'
+checkpoint_path = './east_icdar2015_resnet_v1_50_rbox'
 
 
 @app.route('/', methods=['POST'])
@@ -203,11 +201,11 @@ def index_post():
     bio = io.BytesIO()
     request.files['image'].save(bio)
     img = cv2.imdecode(np.frombuffer(bio.getvalue(), dtype='uint8'), 1)
-
     rst = get_predictor(checkpoint_path)(img)
-    
+
     save_result(img, rst)
     return render_template('index.html', session_id=rst['session_id'])
+
 
 def main():
     global checkpoint_path
@@ -227,4 +225,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
