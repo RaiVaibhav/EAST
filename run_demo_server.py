@@ -8,7 +8,7 @@ import cv2
 import numpy as np
 import uuid
 import json
-
+import origami
 import functools
 import logging
 import collections
@@ -152,7 +152,7 @@ class Config:
 config = Config()
 
 
-app = Flask(__name__)
+app = origami.register("nongh:0.0.0.0:268237:5001:8769:cvfy.cloudcv.org")
 
 @app.route('/')
 def index():
@@ -206,7 +206,8 @@ def index_post():
     save_result(img, rst)
     return render_template('index.html', session_id=rst['session_id'])
 
-
+@origami.crossdomain
+@app.listen()
 def main():
     global checkpoint_path
     parser = argparse.ArgumentParser()
@@ -221,7 +222,6 @@ def main():
             'Checkpoint `{}` not found'.format(args.checkpoint_path))
 
     app.debug = args.debug
-    app.run('0.0.0.0', args.port)
-
-if __name__ == '__main__':
-    main()
+    return 'OK'
+    
+app.run('0.0.0.0', args.port)
