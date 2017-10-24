@@ -377,7 +377,7 @@ def sendImageArray(data, mode):
                         src += 'data:image/jpeg;base64,'
                     elif content_type == 'image/png':
                         src += 'data:image/png;base64,'
-                    src += base64.b64encode(file.read())
+                    src += base64.b64encode(file.read()).decode('UTF-8', 'ignore')
                     tempdata.append(src)
         except Exception as e:
             raise Exception("cvfy [Error Code: 015] => unable to read image file - reason: {}".format(e))
