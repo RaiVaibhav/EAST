@@ -161,7 +161,7 @@ def getUniqueCacheId():
 
     return hashlib.md5(
         functools.reduce((lambda x, y: x + y), [
-            str(reduce(lambda x, y: ord(x) ^ ord(y) 
+            str(functools.reduce(lambda x, y: ord(x) ^ ord(y) 
             if isinstance(x, str) else x ^ ord(y), temp)) 
             for temp in zip(*md5_store)
             ])
