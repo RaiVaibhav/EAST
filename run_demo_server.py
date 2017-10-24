@@ -202,7 +202,8 @@ def index_post():
     import io
     #bio = io.BytesIO()
     #request.files['image'].save(bio)
-    img = cv2.imread(origami.getImageArray('numpy_array'))
+    temp1 = origami.getImageArray()
+    img = cv2.imread(temp1[0])
     rst = get_predictor(checkpoint_path)(img)
 
     save_result(img, rst)
