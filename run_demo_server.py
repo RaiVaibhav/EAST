@@ -154,9 +154,10 @@ config = Config()
 
 app = origami.register("nongh:0.0.0.0:268237:5001:8769:cvfy.cloudcv.org")
 
-@app.route('/')
-def index():
-    return render_template('index.html', session_id='dummy_session_id')
+#@origami.crossdomain
+#@app.route('/')
+#def index():
+#    return render_template('index.html', session_id='dummy_session_id')
 
 
 def draw_illu(illu, rst):
@@ -194,7 +195,7 @@ def save_result(img, rst):
 
 checkpoint_path = './east_icdar2015_resnet_v1_50_rbox'
 
-
+@origami.crossdomain
 @app.route('/', methods=['POST'])
 def index_post():
     global predictor
@@ -205,10 +206,9 @@ def index_post():
     rst = get_predictor(checkpoint_path)(img)
 
     save_result(img, rst)
-    return render_template('index.html', session_id=rst['session_id'])
+    #return render_template('index.html', session_id=rst['session_id'])
+    return 'OK'
 
-@origami.crossdomain
-@app.route('/')
 def main():
     global checkpoint_path
     parser = argparse.ArgumentParser()
@@ -223,6 +223,7 @@ def main():
             'Checkpoint `{}` not found'.format(args.checkpoint_path))
 
     app.debug = args.debug
-    return 'OK'
-    
-app.run('0.0.0.0', 8769)
+    app.run('0.0.0.0', 8769)
+
+if __name__ == '__main__':
+    main()
