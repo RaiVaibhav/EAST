@@ -12,6 +12,9 @@ import json
 import functools
 import logging
 import collections
+import origami
+
+app = origami.register("nongh:0.0.0.0:268237:5001:8769:cvfy.cloudcv.org")
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
@@ -210,7 +213,9 @@ def index_post():
     return render_template('index.html', session_id=rst['session_id'])
 
 
-def main():
+@cvfy.crossdomain
+@app.listen()
+def runner():
     global checkpoint_path
     parser = argparse.ArgumentParser()
     parser.add_argument('--port', default=8769, type=int)
@@ -225,7 +230,7 @@ def main():
 
     app.debug = args.debug
     app.run('0.0.0.0', args.port)
+    return 'OK'
 
-if __name__ == '__main__':
-    main()
+app.run()
 
